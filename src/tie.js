@@ -1,3 +1,7 @@
+/*
+ * todo:
+ * watch path, .i.e obj.path.to.value
+ * */
 ;(function(win ,doc) {
 
     /*
@@ -29,7 +33,7 @@
             return (entry = key[this.name]) && entry[0] === key ?
                 entry[1] : undefined;
           },
-          delete: function(key) {
+          "delete": function(key) {
             this.set(key, undefined);
           }
         };
@@ -157,6 +161,15 @@
             element.addEventListener(evt ,fn);
         }
     }
+    //class指令，删除旧的css class，增加新的css class
+    directives.class = function(directives ,element ,val ,oldVal) {
+        if(oldVal) {
+            element.classList.remove(oldVal);
+        }
+        if(val) {
+            element.classList.add(val);
+        }
+    }
 
     /*
      * =tie
@@ -202,6 +215,7 @@
                     var  system = true
                         ,obj = element
                         ,len = drctvs.length - 1
+                        ,drctv = drctvs[len]
                         ,i ,item
                         ;
                     for(i=0; i<len; i++) {
@@ -212,12 +226,11 @@
                         }
                         obj = obj[item];
                     }
-                    if(system) {//执行系统渲染指令
-                        obj[drctvs[len]] = val;
+                    if(system && (drctv in obj)) {//执行系统渲染指令
+                        obj[drctv] = val;
                     }
-                    else {
-                        //如果是tie预置渲染指令则执行
-                        var item = drctvs.shift();
+                    else {//如果是tie预置渲染指令则执行
+                        item = drctvs.shift();
                         if(item in directives && typeof(directives[item]) == "function") {
                             directives[item].call(that ,drctvs ,element ,val ,oldVal);
                         }
@@ -225,7 +238,7 @@
                 });
             }else if(drctvtp == "function") {//使用自定义渲染指令
                 eachElement(elements ,function(element) {
-                    directive(element ,val ,oldVal);
+                    directive.call(that ,element ,val ,oldVal);
                 });
             }
         }

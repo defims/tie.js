@@ -5,8 +5,8 @@ tie dom and object
 
 ##usage
 
-tie(objectPoint ,"objectProperty" ,elementPoint ,"elementProperty" ,"directive");
-tie(objectPoint ,"objectProperty" ,elementPoint ,"elementProperty" ,function userdefine(){});
+    tie(objectPoint ,"objectProperty" ,elementPoint ,"elementProperty" ,"directive");
+    tie(objectPoint ,"objectProperty" ,elementPoint ,"elementProperty" ,function userdefine(){});
 
 ##how
 
