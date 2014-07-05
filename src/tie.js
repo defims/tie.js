@@ -211,6 +211,7 @@
             if(drctvtp == "string") {
                 var drctvs = directive.split(".");
                 eachElement(elements ,function(element) {
+
                     //判断是否系统渲染指令
                     var  system = true
                         ,obj = element
