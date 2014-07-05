@@ -11,7 +11,6 @@ tie dom and object
 ##how
 
 use Object.defineProperty(objectPoint ,"objectProperty") and Object.defineProperty(elementPoint ,"elementProperty") for watch.  
-if object or element change directive will be excute  
 element = elementPoint[elementProperty]  
 value = objectPoint[objectProperty]  
 if element or value change directive will be excute  
